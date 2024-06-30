@@ -342,6 +342,7 @@
 <script src="{{asset('assets/vendor/js/bootstrap.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
 <script src="{{asset('assets/vendor/js/menu.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
 <!-- endbuild -->
 
@@ -350,8 +351,8 @@
 <!-- Main JS -->
 <script src="{{asset('assets/js/main.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+<script src="{{asset('assets/js/charts-apex.js')}}"></script>
 <!-- Page JS -->
-
-<script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+ <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
 </body>
 </html>

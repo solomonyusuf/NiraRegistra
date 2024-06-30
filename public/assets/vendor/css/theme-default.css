@@ -335,15 +335,15 @@ button.list-group-item-primary.active {
 }
 
 .form-check-input:focus {
-  border-color: #696cff;
+  border-color: #00923f;
   box-shadow: 0 2px 4px 0 rgba(105, 108, 255, 0.4);
 }
 .form-check-input:disabled {
   background-color: #eceef1;
 }
 .form-check-input:checked, .form-check-input[type=checkbox]:indeterminate {
-  background-color: #696cff;
-  border-color: #696cff;
+  background-color: #00923f;
+  border-color: #00923f;
   box-shadow: 0 2px 4px 0 rgba(105, 108, 255, 0.4);
 }
 
@@ -577,7 +577,7 @@ html[dir=rtl] .border-primary {
 }
 
 a {
-  color: #696cff;
+  color: #00923f;
 }
 a:hover {
   color: #787bff;

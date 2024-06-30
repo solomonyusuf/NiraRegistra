@@ -8,5 +8,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [PagesController::class, 'dashboard'])->name('dashboard');
+Route::get('/test', [PagesController::class, 'test'])->name('test');
 
 

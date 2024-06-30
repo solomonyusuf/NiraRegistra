@@ -120,65 +120,37 @@
                 </div>
 
         </div>
-
-
-        <div class="col-12 col-md-12 order-2 order-md-3 order-lg-2 mb-4">
-            <div class="card">
-                <div class="row row-bordered g-0">
-                    <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Domain Analytics</h5>
-                        <div id="totalRevenueChart" class="px-2"></div>
+            <!-- Line Area Chart -->
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            <h5 class="card-title mb-0">Domains</h5>
+                            <small class="text-muted">Registration Analytics</small>
+                        </div>
+                        <div class="dropdown">
+                            <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-calendar"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Today</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Yesterday</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7 Days</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30 Days</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current Month</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last Month</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card-body">
-                            <div class="text-center">
-                                <div class="dropdown">
-                                    <button
-                                        class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                        type="button"
-                                        id="growthReportId"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false">
-                                        2022
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                        <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-medium pt-3 mb-2">62% Company Growth</div>
+                    <div class="card-body">
+                        {!! $chart->container() !!}
 
-                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                            <div class="d-flex">
-                                <div class="me-2">
-                                    <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <small>2022</small>
-                                    <h6 class="mb-0">$32.5k</h6>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="me-2">
-                                    <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                                </div>
-                                <div class="d-flex flex-column">
-                                    <small>2021</small>
-                                    <h6 class="mb-0">$41.2k</h6>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-
+            <!-- /Line Area Chart -->
     </div>
+    {!! $chart->script() !!}
 
 @endsection
