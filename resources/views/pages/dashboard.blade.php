@@ -132,14 +132,12 @@
                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-calendar"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Today</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Yesterday</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 7 Days</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last 30 Days</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Current Month</a></li>
-                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last Month</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">1st Quarter</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">2nd Quarter</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">3rd Quarter</a></li>
+                                <li><a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">4th Quarter</a></li>
+
+
                             </ul>
                         </div>
                     </div>
