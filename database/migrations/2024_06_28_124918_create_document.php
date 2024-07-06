@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('document', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('registrars_id');
+            $table->foreignUuid('registras_id');
             $table->string('name')->nullable();
             $table->string('type')->nullable();
             $table->string('path');

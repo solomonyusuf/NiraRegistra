@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('users_id');
+            $table->foreignUuid('registras_id');
             $table->string('name')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();

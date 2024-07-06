@@ -25,6 +25,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
     <link rel="stylesheet" href="{{asset('assets/vendor/fonts/boxicons.css')}}" />
 
@@ -35,18 +40,19 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-    <!-- Page CSS -->
+   <!-- Page CSS -->
     <!-- Page -->
     <link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}" />
 
     <!-- Helpers -->
     <script src="{{asset('assets/vendor/js/helpers.js')}}"></script>
     <script src="{{asset('assets/js/config.js')}}"></script>
+    <script src="{{asset('assets/js/app-calendar-events.js')}}"></script>
+    <script src="{{asset('assets/js/app-calendar.js')}}"></script>
 </head>
 
 <body>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
@@ -69,10 +75,9 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboards -->
                 <li class="menu-item active">
-                    <a href="javascript:void(0);" class="menu-link">
+                    <a href="{{route('dashboard')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Dashboards">Dashboards</div>
-                        <div class="badge bg-danger rounded-pill ms-auto">5</div>
                     </a>
 
                 </li>
@@ -80,51 +85,47 @@
                 <!-- Layouts -->
 
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <a href="javascript:void(0);"  class="menu-link menu-toggle">
                         <i class="menu-icon tf-icons bx bxs-user-account"></i>
                         <div data-i18n="Authentications">Registra Profiles</div>
                     </a>
                     <ul class="menu-sub">
                         <li class="menu-item">
-                            <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Login</div>
+                            <a href="{{route('all_profiles')}}" class="menu-link" >
+                                <div data-i18n="Basic">All Profiles</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Register</div>
+                            <a href="{{route('create_profile')}}" class="menu-link" >
+                                <div data-i18n="Basic">Create Profile</div>
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Forgot Password</div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-layout"></i>
-                        <div data-i18n="Layouts">Document Types</div>
-                    </a>
+                            <a href="{{route('expired_profiles')}}" class="menu-link" >
+                                <div data-i18n="Basic">Unrenewed Profiles</div>
+                                <div class="badge bg-danger rounded-pill ms-auto">5</div>
 
+                            </a>
+                        </li>
+
+                    </ul>
                 </li>
 
                 <!-- Front Pages -->
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link">
+                    <a href="{{route('educational')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bxs-school"></i>
-                        <div data-i18n="Front Pages">Educational Materials</div>
+                        <div data-i18n="Front Pages">Educational Resource</div>
                     </a>
 
                 </li>
                 <li class="menu-item">
                     <a
-                        href=""
-                        target="_blank"
+                        href="{{route('forum')}}"
+
                         class="menu-link">
                         <i class="menu-icon tf-icons bx bx-grid"></i>
-                        <div data-i18n="Kanban">Forum Materials</div>
+                        <div data-i18n="Kanban">Forum Resource</div>
                     </a>
                 </li>
 
@@ -134,8 +135,7 @@
                 <!-- Apps -->
                 <li class="menu-item">
                     <a
-                        href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-email.html"
-                        target="_blank"
+                        href="{{route('emails')}}"
                         class="menu-link">
                         <i class="menu-icon tf-icons bx bx-envelope"></i>
                         <div data-i18n="Email">Email</div>
@@ -144,7 +144,7 @@
 
                 <li class="menu-item">
                     <a
-                        href=""
+                        href="{{route('schedules')}}"
                         class="menu-link">
                         <i class="menu-icon tf-icons bx bx-calendar"></i>
                         <div data-i18n="Calendar">Schedules</div>
@@ -153,38 +153,18 @@
 
                 <!-- Pages -->
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link ">
+                    <a href="{{route('account', 1)}}" class="menu-link ">
                         <i class="menu-icon tf-icons bx bx-dock-top"></i>
                         <div data-i18n="Account Settings">Account Settings</div>
                     </a>
 
                 </li>
-
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link">
-                        <i class="menu-icon tf-icons bx bxs-news"></i>
-                        <div data-i18n="Misc">Newsletter</div>
-                    </a>
-
-                </li>
-                <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <a href="{{route('all_payment')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-money-withdraw"></i>
                         <div data-i18n="Authentications">Payments</div>
                     </a>
-                    <ul class="menu-sub">
-                        <li class="menu-item">
-                            <a href="auth-login-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">All Payments</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="auth-register-basic.html" class="menu-link" target="_blank">
-                                <div data-i18n="Basic">Renew Payment</div>
-                            </a>
-                        </li>
 
-                    </ul>
                 </li>
                 <li class="menu-item">
                     <a href="javascript:void(0);" class="menu-link">
@@ -194,7 +174,7 @@
 
                 </li>
                 <li class="menu-item">
-                    <a href="javascript:void(0);" class="menu-link">
+                    <a href="{{route('all_users')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-group"></i>
                         <div data-i18n="Misc">Users</div>
                     </a>
@@ -344,15 +324,32 @@
 <script src="{{asset('assets/vendor/js/menu.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-
 <!-- Main JS -->
 <script src="{{asset('assets/js/main.js')}}"></script>
-<script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
-<script src="{{asset('assets/js/charts-apex.js')}}"></script>
-<!-- Page JS -->
- <script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+
+<script src="{{asset('assets/js/token.js')}}"></script>
+<script>
+     let table = new DataTable('#table', {
+        responsive: true
+    });
+
+    // noinspection JSDeprecatedSymbols
+    $(document).ready(function() {
+        $('#otp_target').otpdesigner({
+            typingDone: function (code) {
+                console.log('Entered OTP code: ' + code);
+            },
+        });
+
+        $('#ok').on('click', function () {
+            let result = $('#otp_target').otpdesigner('code');
+            if (result.done) {
+                alert('Entered OTP code: ' + result.code);
+            } else {
+                alert('Typing incomplete!');
+            }
+        });
+    });
+</script>
 </body>
 </html>

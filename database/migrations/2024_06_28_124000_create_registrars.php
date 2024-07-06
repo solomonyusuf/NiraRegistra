@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registrars', function (Blueprint $table) {
+        Schema::create('registras', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('logo')->nullable();
             $table->string('email')->nullable();
+            $table->text('previous_names');
             $table->string('company_name');
             $table->string('phone_no')->nullable();
             $table->string('country');
             $table->string('state');
             $table->string('address');
-            $table->boolean('accredited')->default(false);
-            $table->boolean('debt')->default(false);
+            $table->boolean('accredited')->default(false)->nullable();
+            $table->boolean('debt')->default(false)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('registrars');
+        Schema::dropIfExists('registras');
     }
 };

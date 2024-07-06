@@ -47,6 +47,7 @@
 
 <body style="background: linear-gradient(to top, #1f1a17  0%, #00923f 100%);">
 <!-- Content -->
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
@@ -56,7 +57,7 @@
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center" style="margin-left:35px;margin-bottom: -25px;">
-                        <a href="index.html" class="app-brand-link gap-3">
+                        <a href="{{route('home')}}" class="app-brand-link gap-3">
                           <img src="{{asset('nira_logo.png')}}" style="height:150px;width:500px;" />
                         </a>
                     </div>
@@ -68,14 +69,15 @@
                     </h4>
                     <p class="mb-4 text-center">Please sign-in with your email</p>
 
-                    <form id="formAuthentication" class="mb-3" action="index.html">
+                    <form action="{{route('login')}}" method="post" id="formAuthentication" class="mb-3" >
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email </label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="email"
-                                name="email-username"
+                                name="email"
                                 placeholder="Enter your email "
                                 autofocus />
                         </div>
@@ -99,25 +101,45 @@
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Admin Key</label>
+                                <label class="form-label" for="password">Database Key</label>
                             </div>
-                            <div class="input-group input-group-merge">
-                                <input
-                                    type="password"
-                                    id="password"
-                                    class="form-control"
-                                    name="password"
-                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                    aria-describedby="password" />
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            <style>
+                                .otp-letter-input{
+                                    max-width: 100%;
+                                    height: 70px;
+                                    border: 1px solid #198754;
+                                    border-radius:10px;
+                                    color: #198754;
+                                    font-size: 37px;
+                                    text-align: center;
+                                    font-weight: bold;
+                                }
+                            </style>
+                            <div class="mb-2">
+                                <div class="row pt-4 pb-2">
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                    <div class="col-2">
+                                        <input class="otp-letter-input" type="text">
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me" />
-                                <label class="form-check-label" for="remember-me"> Remember Me For 3 hrs</label>
-                            </div>
-                        </div>
+
                         <div class="mb-3">
                             <button class="btn btn-success d-grid w-100" type="submit">Sign in</button>
                         </div>

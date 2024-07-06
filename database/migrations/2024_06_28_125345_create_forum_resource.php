@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name')->nullable();
             $table->string('path');
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->default(true)->nullable();
             $table->timestamps();
         });
     }
