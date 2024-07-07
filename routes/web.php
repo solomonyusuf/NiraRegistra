@@ -7,20 +7,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::get('/login', function () {
-    return view('welcome');
-});
-Route::post('/login', [AdminController::class, 'Login'])->name('login');
 
-Route::middleware(function(Request $request, $next){
-    if ($request->user()) {
-        return $next($request);
-    }
+Route::post('/login', [PagesController::class, 'Login'])->name('login');
 
-    alert()->warning('Unauthorized Acce')
-    return redirect()->back();
-
-})->group(function (){
+Route::middleware([])->group(function (){
     Route::get('/dashboard', [PagesController::class, 'Dashboard'])->name('dashboard');
     Route::get('/profiles', [PagesController::class, 'AllProfile'])->name('all_profiles');
     Route::get('/expired-profiles', [PagesController::class, 'ExpiredProfile'])->name('expired_profiles');

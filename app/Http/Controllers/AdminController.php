@@ -15,6 +15,7 @@ use App\Models\Registra;
 use App\Models\Schedule;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,39 +23,7 @@ use RealRashid\SweetAlert\Toaster;
 
 class AdminController
 {
-    public static function Login(Request $request)
-    {
-        try
-        {
-            $user = auth()?->user();
-            if($user) return redirect(route('dashboard'));
 
-            $input = $request->all();
-
-            $credential = array('email'=> $input['email'], 'password'=> $input['password']);
-
-            if(auth()->attempt($credential))
-            {
-                $user = auth()->user();
-
-                alert()->success("Welcome {$user?->first_name}", "Account login was successful");
-                return redirect()->route('dashboard');
-
-            }
-            else
-            {
-                alert()->error("Invalid Credentials", "Sorry unable to login at the moment due to wrong credentials");
-                return redirect()->back();
-            }
-        }
-        catch (\Exception $e)
-        {
-            DB::rollBack();
-            toast('An Error Occured', 'error');
-        }
-
-        return redirect()->back();
-    }
     public static function CreateProfile(Request $request)
     {
         try
