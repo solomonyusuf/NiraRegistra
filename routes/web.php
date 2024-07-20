@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::post('/login', [PagesController::class, 'Login'])->name('login');
 
-Route::middleware([])->group(function (){
+Route::middleware(['auth:sanctum'])->group(function (){
     Route::get('/dashboard', [PagesController::class, 'Dashboard'])->name('dashboard');
     Route::get('/profiles', [PagesController::class, 'AllProfile'])->name('all_profiles');
     Route::get('/expired-profiles', [PagesController::class, 'ExpiredProfile'])->name('expired_profiles');
