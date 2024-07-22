@@ -2,13 +2,17 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PagesController;
+use App\Jobs\KeyGenerateJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+   KeyGenerateJob::dispatch();
+
     return view('welcome');
 })->name('home');
 
 Route::post('/login', [PagesController::class, 'Login'])->name('login');
+Route::get('/logout', [PagesController::class, 'Logout'])->name('logout');
 
 Route::middleware(['auth:sanctum'])->group(function (){
     Route::get('/dashboard', [PagesController::class, 'Dashboard'])->name('dashboard');

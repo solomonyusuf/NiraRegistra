@@ -118,22 +118,22 @@
                             <div class="mb-2">
                                 <div class="row pt-4 pb-2">
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                     <div class="col-2">
-                                        <input class="otp-letter-input" type="text">
+                                        <input maxlength="1" name="token[]" class="otp-letter-input" type="text" required>
                                     </div>
                                 </div>
                             </div>

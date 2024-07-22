@@ -1,8 +1,6 @@
 @extends('shared.layout')
 @section('body')
-<?php
- $list = \App\Models\Registra::orderBy('created_at', 'DESC')->get();
-?>
+
 <div class="row">
     <div class="col-md-12 mb-4 order-0">
         <h4 class="py-3 mb-4">

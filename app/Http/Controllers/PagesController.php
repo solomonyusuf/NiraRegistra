@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 
 
 use App\Charts\DashboardChart;
+use App\Models\BulkEmail;
 use App\Models\Calender;
+use App\Models\DatabaseKey;
 use App\Models\Day;
 use App\Models\Month;
+use App\Models\Payment;
 use App\Models\Registra;
 use App\Models\Schedule;
 use App\Models\User;
@@ -29,21 +32,48 @@ class PagesController
 
             $input = $request->all();
 
-            $credential = array('email'=> $input['email'], 'password'=> $input['password']);
 
-            if(auth()->attempt($credential))
+            if(count($input['token']) == 6)
             {
-                $user = auth()->user();
+                $token = implode('', $input['token']);
 
-                alert()->success("Welcome {$user?->first_name}", "Account login was successful");
-                return redirect()->route('dashboard');
+                $query_key = DatabaseKey::
+                whereDate('approved_date', '=', Carbon::now()->toDate())->first();
 
+                if(!$query_key)
+                {
+                    toast('No Database Key','error');
+                    return redirect()->back();
+                }
+                if($query_key?->key != $token)
+                {
+                    toast('Token Invalid','error');
+                    return redirect()->back();
+                }
+
+
+                $credential = array('email'=> $input['email'], 'password'=> $input['password']);
+
+                if(auth()->attempt($credential, false))
+                {
+                    $user = auth()->user();
+
+                    alert()->success("Welcome {$user?->first_name}", "Account login was successful");
+                    return redirect()->route('dashboard');
+
+                }
+                else
+                {
+                    alert()->error("Invalid Credentials", "Sorry unable to login at the moment due to wrong credentials");
+                    return redirect()->back();
+                }
             }
             else
             {
-                alert()->error("Invalid Credentials", "Sorry unable to login at the moment due to wrong credentials");
+                toast('Token Unrecognized','error');
                 return redirect()->back();
             }
+
         }
         catch (\Exception $e)
         {
@@ -53,25 +83,31 @@ class PagesController
 
         return redirect()->back();
     }
-
     public static function Dashboard()
    {
        $chart = new DashboardChart();
 
-       $chart->labels(['One', 'Two', 'Three', 'Four']);
-       $chart->dataset('1ST Quarter', 'line', [0, 1, 2, 3])
+       $chart->labels(['2024']);
+       $chart->dataset('Pricing', 'line', [10000000, 50000000, 100000000, 120000000])
            ->color('#028A0F');
-       $chart->dataset('2ND Quarter', 'line', [1, 3, 4, 6])
-           ->color('purple');
-       $chart->dataset('3ND Quarter', 'line', [0, 5, 4, 3])
-           ->color('blue');
-       $chart->dataset('4TH Quarter', 'line', [0, 2, 3, 5])
-           ->color('red');
 
-       return view('pages.dashboard', ['chart' => $chart]);
+
+       $profiles = Registra::count();
+       $emails = BulkEmail::count();
+       $schedule = Schedule::count();
+       $payments = Payment::count();
+       $users = User::count();
+
+       return view('pages.dashboard', [
+           'chart' => $chart,
+           'profiles'=> $profiles,
+           'emails'=> $emails,
+           'schedule'=> $schedule,
+           'payments'=> $payments,
+           'users'=> $users,
+       ]);
    }
-
-   public static function test()
+    public static function test()
    {
 
        $client = Client::account('default');
@@ -114,10 +150,26 @@ class PagesController
 
        dd($results);
    }
-
+    public static function Logout()
+    {
+        auth()->logout();
+        toast('Logout Succeeded', 'success');
+        return redirect()->route('home');
+    }
     public static function AllProfile()
     {
-        return view('pages.registras.list');
+        $list = [];
+        $search = \request()->search;
+        if($search)
+        {
+            $list = Registra::where(['company_name','like', "%{$search}%"])
+                ->orWhere(['previous_names','like', "%{$search}%"])
+                ->orderBy('created_at', 'DESC')->get();
+        }
+        else $list = Registra::orderBy('created_at', 'DESC')->get();
+
+
+        return view('pages.registras.list',['list'=> $list]);
     }
     public static function CreateProfile()
     {
