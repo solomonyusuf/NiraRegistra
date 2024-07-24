@@ -283,7 +283,7 @@ class AdminController
     }
     public static function  GenerateCalender()
     {
-        $carbon_year = Carbon::now()->yearOfMillennium() + 1;
+        $carbon_year = 24;
 
         $year = "20{$carbon_year}";
 

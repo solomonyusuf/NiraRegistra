@@ -306,7 +306,7 @@ class PagesController
     {
         AdminController::GenerateCalender();
 
-        $year = "20".(Carbon::now()->yearOfMillennium() + 1);
+        $year = "2024";
 
         $calender = Calender::where(['year'=> $year])->first()->id;
         $current = Month::where([
