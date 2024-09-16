@@ -1,7 +1,8 @@
 @extends('shared.layout')
 @section('body')
     <?php
-    $data = \App\Models\User::first();
+
+    $data = \App\Models\User::find(auth()->user()?->id);
     ?>
     <div class="row card shadow">
         <h4 class="py-3 mb-4">

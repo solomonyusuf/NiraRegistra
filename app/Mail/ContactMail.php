@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class KeyGenerateMail extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,8 +19,11 @@ class KeyGenerateMail extends Mailable
      * @return void
      */
     public function __construct(
+        public string $company,
+        public string $phone_no,
         public string $subject_mail,
-        public string $key
+        public string $mail_subject,
+        public string $mail_message
     )
     {
         //
@@ -28,9 +31,12 @@ class KeyGenerateMail extends Mailable
 
     public function build()
     {
-        return $this->subject($this->subject_mail)->view('mails.generate', [
+        return $this->subject($this->mail_subject)->view('mails.generate', [
+            'subject'=> $this->mail_subject,
+            'phone'=> $this->phone_no,
+            'company'=> $this->company,
             'subject_mail'=> $this->subject_mail,
-            'key'=> $this->key
+            'mail_message'=> $this->mail_message
 
         ]);
     }

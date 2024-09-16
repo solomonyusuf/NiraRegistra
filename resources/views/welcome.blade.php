@@ -101,7 +101,7 @@
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="password">Database Key</label>
+                                <label class="form-label" for="password">Access Key</label>
                             </div>
                             <style>
                                 .otp-letter-input{
@@ -154,7 +154,36 @@
 </div>
 
 <!-- / Content -->
+<script>
+    // Get all the input fields
+    const inputs = document.querySelectorAll('input');
 
+    // Loop through each input field
+    inputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+            // Move to the next input field if the current one is filled
+            if (input.value.length === input.maxLength) {
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        });
+        // Handle keydown event (for moving backward)
+        input.addEventListener('keydown', function(event) {
+            // Check if the backspace key is pressed and the input is empty
+            if (event.key === 'Backspace' && input.value.length === 0) {
+                const prevInput = inputs[index - 1];
+                if (prevInput) {
+                    prevInput.focus();
+                    prevInput.value = prevInput.value.slice(0, prevInput.maxLength - 1); // Optional: delete last character from the previous input
+                }
+            }
+        });
+    });
+
+
+</script>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->

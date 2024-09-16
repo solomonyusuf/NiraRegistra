@@ -162,8 +162,8 @@ class PagesController
         $search = \request()->search;
         if($search)
         {
-            $list = Registra::where(['company_name','like', "%{$search}%"])
-                ->orWhere(['previous_names','like', "%{$search}%"])
+            $list = Registra::where('company_name','like', "%{$search}%")
+                ->orWhere('previous_names','like', "%{$search}%")
                 ->orderBy('created_at', 'DESC')->get();
         }
         else $list = Registra::orderBy('created_at', 'DESC')->get();
@@ -306,7 +306,7 @@ class PagesController
     {
         AdminController::GenerateCalender();
 
-        $year = "2024";
+        $year = env('year');
 
         $calender = Calender::where(['year'=> $year])->first()->id;
         $current = Month::where([
@@ -321,7 +321,7 @@ class PagesController
         return view('pages.schedules',
             ['month' => $current,
             'months' => $months,
-            'year'=> $year
+            'year'=> $year 
             ]);
     }
 

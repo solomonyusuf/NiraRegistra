@@ -14,14 +14,14 @@
        style="margin: 0 auto;" cellspacing="0" cellpadding="0" border="0" aliargin-top: 30px; background-color: #fff;">
     <tr>
         <td style="padding: 20px 0; text-align: center;">
-            <img src="{{asset('nira_logo.png')}}" width="100" height="auto">
+            <h1 style="font-size: 25px; color: #fff; margin: 0; font-weight: bold; text-align: center;">NIRA</h1>         
         </td>
     </tr>
     <tr>
         <td style="background-color: #fff; padding: 30px 30px;">
-            <h1 style="font-size: 20px; color: #333; margin: 0; font-weight: bold; text-align: center;">{{$subject}}</h1>
-            <p style="font-size: 16px; color: black; margin: 20px 0;">The Database Token has been generated for authorized access</p>
-            <p style="font-size: 24px; font-weight:600; color: #135f1c; margin-bottom: 10px; ">{{ $token }}</p>
+            <h1 style="font-size: 20px; color: #333; margin: 0; font-weight: bold; text-align: center;">{{$subject_mail}}</h1>
+            <p style="font-size: 16px; color: black; margin: 20px 0;">The Access Token has been generated for authorized access</p>
+            <p style="font-size: 24px; font-weight:600; color: #135f1c; margin-bottom: 10px; ">{{ $key }}</p>
             <p style="font-size: 16px; color: #333; margin: 0;">Best regards, <br> NIRA Support Team.</p>
         </td>
     </tr>

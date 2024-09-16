@@ -58,7 +58,7 @@ class KeyGenerateJob implements ShouldQueue
                 foreach (User::get() as $item)
                 {
                     Mail::to($item->email)->send(new KeyGenerateMail(
-                        'Database Key Token',
+                        'Access Key Token',
                         $key->key));
                 }
 

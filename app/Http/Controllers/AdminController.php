@@ -254,10 +254,18 @@ class AdminController
                 'month_id'=> $request->month_id
             ])->first();
 
+            $target = Carbon::parse($request->start);
+             
+            $month_name = $target->format('F');
+            $day_int = $target->day;
+
+            $month = Month::where('name', 'like', "%{$month_name}%")->first();
+            $day = Day::where(['day'=> $day_int])->first();
+
              Schedule::create(array(
-                 'month_id' => $request->month_id,
+                 'month_id' => $month->id,
                  'days_id' => $day->id,
-                 'day' =>$day->day,
+                 'day' =>$target->day,
                  'tag' => $request->tag,
                  'title' => $request->title,
                  'start' => $request->start,
@@ -283,9 +291,9 @@ class AdminController
     }
     public static function  GenerateCalender()
     {
-        $carbon_year = 24;
+        $carbon_year = env('year');
 
-        $year = "20{$carbon_year}";
+        $year = "{$carbon_year}";
 
         $query = Calender::where(['year'=> $year])->first();
 
