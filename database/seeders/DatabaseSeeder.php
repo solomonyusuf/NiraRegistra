@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'first_name' => 'Solomon',
             'last_name' => 'Yusuf',
-            'email' => 'admin@nira.org.ng',
+            'email' => 'solomonyusufolayinka@gmail.com',
             'password' => bcrypt('12345'),
         ]);
     }

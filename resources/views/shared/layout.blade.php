@@ -103,8 +103,7 @@
                         <li class="menu-item">
                             <a href="{{route('expired_profiles')}}" class="menu-link" >
                                 <div data-i18n="Basic">Unrenewed Profiles</div>
-                                <div class="badge bg-danger rounded-pill ms-auto">5</div>
-
+                                
                             </a>
                         </li>
 

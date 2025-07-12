@@ -6,8 +6,6 @@ use App\Jobs\KeyGenerateJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-   KeyGenerateJob::dispatch();
-
     return view('welcome');
 })->name('home');
 
