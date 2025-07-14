@@ -64,7 +64,7 @@
                     <!-- /Logo -->
                     <h4 class="mb-2 text-capitalize text-center">
                         <strong>
-                            REGISTRA'S DATABASE
+                            REGISTRA'S ACCREDITATION
                         </strong>
                     </h4>
                     <p class="mb-4 text-center">Please sign-in with your email</p>
